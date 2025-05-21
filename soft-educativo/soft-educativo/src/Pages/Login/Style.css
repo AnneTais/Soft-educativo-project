@@ -1,16 +1,19 @@
+/* GLOBAIS / RESET */
 body {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   width: 100%;
-  background: linear-gradient(180deg, #e0fac1 0%, #d2f6a9 100%);
-  padding: 20px; /* Adicione um pouco de padding ao body para evitar que o conteúdo toque as bordas em telas pequenas */
+  background: linear-gradient(180deg, #e0fac1 0%, #ffffff 100%);
+  padding: 20px;
   margin: 0;
   box-sizing: border-box;
+  font-family: Arial, sans-serif; /* Adicione uma fonte base */
 }
 
-.login {
+/* ESTILOS DO CONTAINER PRINCIPAL DO LOGIN/CADASTRO */
+.loginpage { /* Renomeei de .login para .loginpage conforme seu JSX */
   display: flex;
   justify-content: center; /* Centraliza horizontalmente */
   align-items: center; /* Centraliza verticalmente */
@@ -24,15 +27,61 @@ body {
   flex-direction: column;
   width: 95%;
   max-width: 800px;
-  max-height: 700px;
   padding: 10px;
   border-radius: 10px;
-  background-color: #81c531;
+  background-color: #d3f1a1;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
   margin-bottom: 10px;
   box-sizing: border-box;
 }
 
+/* ESTILOS DE TÍTULOS */
+h1,
+h2,
+h3 {
+  text-align: center;
+  color: #0e1b00;
+  margin-bottom: 15px;
+}
+
+/* ESTILOS DE INPUTS E BOTÕES GERAIS */
+input,
+button {
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  border-radius: 20px; /* Para inputs */
+  box-sizing: border-box;
+}
+
+input {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* ESTILOS PARA OS BOTÕES DE CADASTRAR/LOGIN (botão verde escuro) */
+/* Sobrescreve a regra geral `button` para o botão de "CADASTRAR" e os botões de login */
+button {
+  background-color: #4cba18;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
+  width: auto; /* Adapta a largura ao conteúdo */
+  max-width: none;
+  display: inline-block; /* Permite controlar largura e margem */
+  border-radius: 50px; /* Mais arredondado */
+  padding: 15px 15px;
+  text-align: center;
+  box-sizing: border-box;
+  flex-grow: 1; /* Permite que o botão se expanda em flex containers */
+  margin-top: 15px; /* Adiciona margem acima do botão de cadastrar */
+}
+
+button:hover {
+  background-color: #063701;
+}
+
+/* ESTILOS PARA A SEÇÃO "JÁ SOU UM CACTHONIANO" */
 .divparalogar {
   padding: 20px;
   text-align: center;
@@ -53,46 +102,89 @@ body {
   margin-top: 5px;
 }
 
+label {
+  display: block; /* Torna o label um elemento de bloco, ocupando sua própria linha */
+  width: 100%;    /* Garante que o label ocupe toda a largura disponível */
+  text-align: left; /* Alinha o texto do label à esquerda */
+  margin-bottom: 5px; /* Adiciona um pequeno espaço abaixo do label e acima do input */
+  color: #152305; /* Cor do texto do label, se quiser que seja como os títulos */
+  font-weight: bold; /* Opcional: para destacar o label */
+}
 
-h1,
-h2,
-h3 {
+
+/* ESTILOS PARA A SEÇÃO DE ESCOLHA DE AVATAR */
+.avatar-selection {
+  background-color: #ffffff; /* Cor de fundo da seção de avatar */
+  border-radius: 20px; /* Arredondamento dos cantos da seção */
+  padding: 15px;
+  margin-top: 20px; /* Espaço entre o último input e a seção de avatar */
+  margin-bottom: 20px; /* Espaço entre a seção de avatar e o botão Cadastrar */
   text-align: center;
-  color: #d2f6a9;
-  margin-bottom: 15px;
 }
 
-input,
-button {
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-  border-radius: 20px;
-  box-sizing: border-box;
+.avatar-selection label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #1f3802; /* Cor do texto "Escolha seu avatar:" */
 }
 
-input {
-  width: 100%;
-  margin-bottom: 20px;
+.avatar-selection .avatar-options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px; /* Espaço entre os botões de avatar */
+  flex-wrap: wrap; /* Para quebrar a linha em telas menores */
 }
 
-button {
-  background-color: #094f02;
+/* ESTILOS DOS BOTÕES DE AVATAR (ONDE AS IMAGENS FICAM DENTRO) */
+.avatar-selection .avatar-options .avatar-button {
+  background: none; /* Remove o fundo padrão do botão */
+  border: 2px solid transparent; /* Borda transparente inicialmente */
+  padding: 0; /* Remove padding interno do botão */
+  cursor: pointer;
+  border-radius: 50%; /* Torna o botão redondo */
+  overflow: hidden; /* Corta a imagem se exceder o círculo */
+  width: 70px; /* Tamanho do botão redondo */
+  height: 70px; /* Tamanho do botão redondo */
+  display: flex; /* Para centralizar a imagem */
+  justify-content: center;
+  align-items: center;
+  transition: border-color 0.3s ease; /* Transição suave para a borda */
+  /* Sobrescrever estilos globais de button se necessário */
+  font-size: 0; /* Para evitar que o texto do botão interfira, se houver */
+  flex-grow: 0; /* Desativa o flex-grow para esses botões específicos */
+}
+
+.avatar-selection .avatar-options .avatar-button:hover,
+.avatar-selection .avatar-options .avatar-button.selected {
+  border-color: #094f02; /* Borda verde escura ao hover/selecionar */
+}
+
+/* ESTILOS DAS IMAGENS DENTRO DOS BOTÕES DE AVATAR */
+.avatar-selection .avatar-options .avatar-button img {
+  display: block;
+  width: 100%; /* Imagem preenche o botão */
+  height: 100%; /* Imagem preenche o botão */
+  object-fit: cover; /* Cobre o círculo sem distorcer */
+  border-radius: 50%; /* Imagem também redonda */
+}
+
+.avatar-selection .avatar-options .avatar-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(9, 79, 2, 0.5);
+}
+
+#cadastro {
+  display: block;
+  margin: 15px auto 0 auto;
+  width: 200px;
   color: white;
   cursor: pointer;
-  transition: background 0.3s;
-  width: auto;
-  max-width: none;
-  display: inline-block;
   border-radius: 50px;
   padding: 15px 15px;
   text-align: center;
   box-sizing: border-box;
-  flex-grow: 1;
-}
-
-button:hover {
-  background-color: #063701;
 }
 
 .foto {
@@ -114,8 +206,9 @@ button:hover {
   z-index: -1;
 }
 
+/* MEDIA QUERIES (RESPONSIVIDADE) */
 @media (max-width: 768px) {
-  .login {
+  .loginpage { /* Corrigido de .login para .loginpage */
     align-items: flex-start;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -124,8 +217,8 @@ button:hover {
 
   .conteiner {
     padding: 15px;
-    margin-top: 20px; /* Adiciona margem superior para separação do topo */
-    margin-bottom: 20px; /* Mantém a margem inferior */
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
 
   h1 {
@@ -145,7 +238,7 @@ button:hover {
 }
 
 @media (max-width: 500px) {
-  .login {
+  .loginpage { /* Corrigido de .login para .loginpage */
     padding: 15px;
   }
 
@@ -167,5 +260,14 @@ button:hover {
   button {
     font-size: 12px;
     padding: 10px;
+  }
+
+  .avatar-selection .avatar-options {
+    gap: 10px; /* Ajusta o gap em telas menores */
+  }
+
+  .avatar-selection .avatar-options .avatar-button {
+    width: 60px; /* Avatares um pouco menores em telas bem pequenas */
+    height: 60px;
   }
 }
